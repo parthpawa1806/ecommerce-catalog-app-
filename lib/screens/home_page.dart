@@ -1,20 +1,66 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_catalog/widgets/drawer.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
+import 'package:flutter_catalog/models/catalog.dart';
+import 'package:flutter_catalog/rotes.dart';
+import 'package:flutter_catalog/screens/cartPage.dart';
+import 'package:flutter_catalog/widgets/themes.dart';
+import 'package:velocity_x/velocity_x.dart';
+import '../widgets/home_widgets/catalog_header.dart';
+import '../widgets/home_widgets/catalog_list.dart';
 
-class homepage extends StatelessWidget {
+class homepage extends StatefulWidget {
+  @override
+  _homepageState createState() => _homepageState();
+}
+
+class _homepageState extends State<homepage> {
   final int days = 30;
+  final String name = "Codepur";
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    await Future.delayed(Duration(seconds: 2));
+
+    final catalogJson = await rootBundle.loadString("jsonfiles/catalog.json");
+    var decodedData = jsonDecode(catalogJson);
+    var productsdata = decodedData["products"];
+    CatalogModel.items = List.from(productsdata)
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
-        title: Text("Catalog App"),
-      ) ,
-        body: Center(
-      child: Container(
-        child: Text("welcome to the app made in $days days workshop"),
-      ),
-    ),
-    drawer: MyDrawer(),
-    );
+        backgroundColor:context.canvasColor,
+        floatingActionButton: FloatingActionButton(
+          onPressed: 
+            () => Navigator.pushNamed(context, MyRoutes.cartPageRoute),
+          backgroundColor:context.theme.buttonColor,
+          child: Icon(CupertinoIcons.cart),
+        ),
+        body: SafeArea(
+          child: Container(
+            padding: Vx.m32,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CatalogHeader(),
+                if (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+                  CatalogList().expand()
+                else
+                  CircularProgressIndicator().centered().expand(),
+              ],
+            ),
+          ),
+        ));
   }
 }
