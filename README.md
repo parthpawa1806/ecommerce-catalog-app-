@@ -1,16 +1,6 @@
-# flutter_application_1
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# ECOMMERCE CATALOG APP
+this is a basic catalog app developed using flutter
+some of the implemented features are login and signin screen,cart functionality,product deatil page 
+here are some screenshots of the app
+![Screenshot_2023-03-22-00-29-30-284_com example flutter_application_1](https://user-images.githubusercontent.com/103586169/226715285-e4cf9586-47fa-44de-9f31-3c95c5071e0c.jpg)
+![Screenshot_2023-03-22-00-29-26-615_com example flutter_application_1](https://user-images.githubusercontent.com/103586169/226715294-c377d6c8-042c-4f31-afcf-2b99140caa4c.jpg)
